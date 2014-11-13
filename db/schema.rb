@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112200212) do
+ActiveRecord::Schema.define(version: 20141113193911) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20141112200212) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20141112200212) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20141112200212) do
     t.string   "rus_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "alias"
     t.string   "value_from_table"
     t.string   "value_from_compare"
     t.boolean  "translate",          default: false
@@ -72,12 +73,12 @@ ActiveRecord::Schema.define(version: 20141112200212) do
     t.datetime "updated_at"
   end
 
-  add_index "graph_positions", ["value"], name: "index_graph_positions_on_value", using: :btree
+  add_index "graph_positions", ["value"], name: "index_graph_positions_on_value"
 
   create_table "logs", force: true do |t|
     t.string   "level"
     t.string   "text"
-    t.text     "stack_trace"
+    t.text     "stack_trace", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -100,16 +101,17 @@ ActiveRecord::Schema.define(version: 20141112200212) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "translate",        default: false
-    t.text     "rus_text"
+    t.text     "rus_name"
   end
 
-  add_index "property_positions", ["rating"], name: "index_property_positions_on_rating", using: :btree
+  add_index "property_positions", ["rating"], name: "index_property_positions_on_rating"
+  add_index "property_positions", ["text"], name: "index_property_positions_on_text"
 
   create_table "years", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "value",      limit: 24
+    t.float    "value"
   end
 
 end

@@ -49,3 +49,25 @@
 .float_right {
   float: right;
 }
+
+.property_name_table,
+.property_data {
+  width: 20%;
+}
+.property_graph_data {
+  width: auto;
+}
+.property_graph_data td{
+  width: 70px;
+}
+.property_group {
+  border:1px solid;
+}
+tr.border_bottom td {
+  border-bottom:1pt solid black;
+}
+.col-text,
+.col-rus_text,
+.col-translater {
+  width:30%;
+}

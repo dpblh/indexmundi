@@ -12,11 +12,16 @@ class Country < ActiveRecord::Base
       hash = {}
       if pps.first
         pps.first.property_positions.each { |pp|
-          category_name = pp.property_name.category.name
-          if hash[category_name]
-            hash[category_name] << pp
-          else
-            hash[category_name] = [pp]
+          if pp.property_name.category
+
+            category_name = pp.property_name.category.name
+            if hash[category_name]
+              hash[category_name] << pp
+            else
+              hash[category_name] = [pp]
+            end
+
+
           end
         }
       end

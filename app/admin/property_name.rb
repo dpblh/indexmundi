@@ -20,8 +20,8 @@ ActiveAdmin.register PropertyName do
     column :translate
     column :name, sortable: true
     column :rus_name, sortable: true
-    column :translate do |property_name|
-      text_field_tag property_name.id, '', class: :translate
+    column :translater do |property_name|
+      text_field_tag property_name.id, '', class: :translater
     end
     actions
 
@@ -53,18 +53,6 @@ ActiveAdmin.register PropertyName do
     f.actions
 
   end
-
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if resource.something?
-  #   permitted
-  # end
 
   # Контроллер перевода
   member_action :translate, method: :put do

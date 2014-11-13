@@ -19,8 +19,8 @@ ActiveAdmin.register Country do
     column :translate
     column :name, sortable: true
     column :rus_name, sortable: true
-    column :translate do |country|
-      text_field_tag country.id, '', class: :translate
+    column :translater do |country|
+      text_field_tag country.id, '', class: :translater
     end
     actions
 
@@ -39,42 +39,65 @@ ActiveAdmin.register Country do
     Country.hash_category_places(country).each do |key, value|
       panel key do
         table_for value, class: :property_position do
-          column :property_name do |property_position|
+          column :property_name, class: :property_name_table do |property_position|
             property_position.property_name.rus_name or property_position.property_name.name
           end
           column :property_position, class: :property_position do |property_position|
-            div {
 
-              div class: :text do
+            table class: :property_group do
 
-                property_position.text.html_safe
-
+              tr class: :border_bottom do
+                td class: :property_data do
+                  'Текст'
+                end
+                td {
+                  if property_position.rus_name
+                    property_position.rus_name.html_safe
+                  elsif property_position.text
+                    property_position.text.html_safe
+                  end
+                }
               end
-
-              div class: :rating do
-
-                property_position.rating
-
+              tr class: :border_bottom do
+                td class: :property_data do
+                  'Рейтинг'
+                end
+                td {
+                  property_position.rating if property_position.rating
+                }
               end
+              tr class: :border_bottom do
+                td class: :property_data do
+                  'График'
+                end
+                td {
+                  table class: :property_graph_data do
 
-              div class: :table do
-
-                table {
-                  property_position.graph_positions.each do |graph_position|
                     tr {
                       td {
-                        graph_position.year.name
+                        'Страны'
                       }
+                      property_position.graph_positions.each do |graph_position|
+                        td {
+                          graph_position.year.name
+                        }
+                      end
+                    }
+                    tr {
                       td {
-                        graph_position.value
+                        'Статистика'
                       }
+                      property_position.graph_positions.each do |graph_position|
+                        td {
+                          graph_position.value
+                        }
+                      end
                     }
                   end
                 }
-
               end
 
-            }
+            end
           end
         end
       end

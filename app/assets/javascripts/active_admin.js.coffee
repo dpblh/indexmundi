@@ -29,7 +29,7 @@ $(->
     resource = 'property_positions'
 
 
-  $('input[class=translate]').keypress( (e)->
+  $('input[class=translater],textarea[class=translater]').keypress( (e)->
     if e.which == 13
       $.ajax(
         method : 'PUT'
@@ -37,9 +37,9 @@ $(->
         data :
           translate : e.target.value
         success : (place)->
-          $(e.target).parent().prev().text(place.rus_name)
+          $(e.target).parent().prev().html(place.rus_name)
           $(e.target).parents('tr').find('.col-translate .status_tag').removeClass('no').addClass('yes').text('YES')
-          $(e.target).parents('tr').next().find('.translate').focus()
+          $(e.target).parents('tr').next().find('.translater').focus()
         error : ->
           console.log 'fault'
       )
